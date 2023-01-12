@@ -21,9 +21,13 @@ struct Title: ViewModifier {
 
 struct ContentView: View {
     var body: some View {
-        Color.blue
-            .frame(width: 300, height: 200)
-            .watermarked(with: "Hacking with Swift")
+        VStack {
+            Text("I did it")
+                .blueTitleStyle()
+            Color.blue
+                .frame(width: 300, height: 200)
+                .watermarked(with: "Hacking with Swift")
+        }
     }
 }
 
@@ -54,8 +58,21 @@ struct Watermark: ViewModifier {
     }
 }
 
+struct LargeBlueFont: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.blue)
+    }
+}
+
+
 extension View {
     func watermarked(with text: String) -> some View {
         modifier(Watermark(text: text))
+    }
+    
+    func blueTitleStyle() -> some View {
+        modifier(LargeBlueFont())
     }
 }
